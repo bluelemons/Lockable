@@ -24,7 +24,7 @@ module Locked
     end
 
     def lock!
-      self.locked = Date.today if lockable?
+      self.locked_at = Time.now if lockable?
     end
 
     def unlock!
