@@ -37,8 +37,10 @@ module Locked
 
     private
     def change_on_lock
-      self.fields.each do |field|
-        errors.add(field.to_sym, "Este campo no puede ser modificado") if flag
+      if locked?
+        self.fields.each do |field|
+          errors.add(field.to_sym, "Este campo no puede ser modificado") if flag
+        end
       end
     end
   end
