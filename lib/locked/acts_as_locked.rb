@@ -28,7 +28,7 @@ module Locked
     end
 
     def unlock!
-      self.locked = nil
+      self.locked_at = nil
     end
 
     def locked?
