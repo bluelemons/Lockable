@@ -3,16 +3,22 @@ module Locked
     extend ActiveSupport::Concern
 
     included do
+
     end
 
     module ClassMethods
       def acts_as_locked(options = {})
-        # your code will go here
+        cattr_accessor :fields
+        self.fields = options.delete(:fields)
       end
     end
 
     def lockable?
-      true
+      flag = true
+      self.fields.each do |field|
+        flag = false unless self.send(field.to_sym)
+      end
+      flag
     end
 
     def lock!
@@ -22,7 +28,6 @@ module Locked
     def unlock!
       self.locked = nil
     end
-
 
   end
 end
