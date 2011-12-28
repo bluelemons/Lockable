@@ -11,7 +11,7 @@ module Locked
         cattr_accessor :fields
         self.fields = options.delete(:fields)
 
-        validates :changes_on_lock
+        validate :changes_on_lock
       end
     end
 
