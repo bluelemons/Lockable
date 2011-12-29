@@ -4,14 +4,12 @@ class PeopleController < ApplicationController
   def lock
     @person = Person.find(params[:id])
     @person.lock!
-    @person.save
     redirect_to @person, notice: 'Person was locked!'
   end
 
   def unlock
     @person = Person.find(params[:id])
     @person.unlock!
-    @person.save
     redirect_to @person, notice: 'Person was unlocked!'
   end
 
