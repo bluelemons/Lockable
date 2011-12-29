@@ -1,5 +1,31 @@
 Install
+
+Gemfile
   gem 'locked', git => 'git@github.com:BlueLemon/Lockable.git'
 
 Model
   acts_as_locked(:foo, :bar)
+
+Migration
+  add_column :model, :locked_at, :datetime
+
+
+Example of usage
+
+In the Person model add
+  acts_as_locked(:name)
+
+In rails console
+  p = Person.new
+  p.name = "Oldani Pablo"
+  p.lock
+  p.save # true
+  p.name = "Eloy Espinaco"
+  p.save # false
+
+  p = Person.new
+  p.name = "Oldani Pablo"
+  p.lock
+  p.save # true
+  p.age = "30"
+  p.save # true
