@@ -14,6 +14,7 @@ class LockedTest < ActiveSupport::TestCase
   test 'Person cant be locked if all fields arent completed' do
     person = Person.new
     person.save
+    person.lock!
     #assert_raise RuntimeError {person.lock!}
     assert_equal nil, person.locked_at
   end

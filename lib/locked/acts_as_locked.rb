@@ -36,7 +36,7 @@ module Locked
         self.locked_at = Time.now
         self.save!
       else
-        raise RuntimeError "No se completaron todos los campos necesarios"
+        #raise "No se completaron todos los campos necesarios"
       end
     end
 
@@ -45,7 +45,7 @@ module Locked
         self.locked_at = nil
         self.save!
       else
-        raise "El registro no se encuentra cerrado"
+        #raise "El registro no se encuentra cerrado"
       end
     end
 
