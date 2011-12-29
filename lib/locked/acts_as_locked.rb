@@ -23,12 +23,30 @@ module Locked
       flag
     end
 
-    def lock!
+    def lock
       self.locked_at = Time.now if lockable?
     end
 
-    def unlock!
+    def unlock
       self.locked_at = nil
+    end
+
+    def lock!
+      if lockable?
+        self.locked_at = Time.now
+        self.save!
+      else
+        raise RuntimeError "No se completaron todos los campos necesarios"
+      end
+    end
+
+    def unlock!
+      if locked_at != nil
+        self.locked_at = nil
+        self.save!
+      else
+        raise "El registro no se encuentra cerrado"
+      end
     end
 
     def locked?
@@ -39,7 +57,7 @@ module Locked
     def changes_on_lock
       if locked_at
         self.fields.each do |field|
-          errors.add(field.to_sym, "Este campo no puede ser modificado") if self.send("#{field}_changed?")
+          errors.add(field.to_sym, "Este campo no puede ser modificado, registro cerrado") if self.send("#{field}_changed?")
         end
       end
     end
