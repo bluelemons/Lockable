@@ -1,3 +1,5 @@
-= Locked
+Install
+gem 'locked', git => 'git@github.com:BlueLemon/Lockable.git'
 
-This project rocks and uses MIT-LICENSE.
+Model
+  acts_as_locked(:foo, :bar)
