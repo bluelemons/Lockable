@@ -10,6 +10,10 @@
   <%= @person.age %>
 </p>
 
+<p>
+  <b>Locked_at:</b>
+  <%= @person.locked_at %>
+</p>
 
 <%= link_to 'Edit', edit_person_path(@person) %> |
 <%= link_to 'Back', people_path %>
