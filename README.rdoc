@@ -4,16 +4,28 @@ Gemfile
   gem 'locked', git => 'git@github.com:BlueLemon/Lockable.git'
 
 Model
-  acts_as_locked(:foo, :bar)
+
+  Model < ActiveRecord::Base
+    acts_as_locked(:foo, :bar)
+  end
 
 Migration
-  add_column :model, :locked_at, :datetime
+  class AddLockedToPerson < ActiveRecord::Migration
+    def change
+      add_column :model, :locked_at, :datetime
+    end
+  end
+
 
 
 Example of usage
 
 In the Person model add
-  acts_as_locked(:name)
+  class Person < ActiveRecord::Base
+    # name:string
+    # age:integer
+    acts_as_locked(:name)
+  end
 
 In rails console
   p = Person.new
