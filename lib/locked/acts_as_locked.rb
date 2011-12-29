@@ -7,9 +7,9 @@ module Locked
     end
 
     module ClassMethods
-      def acts_as_locked(options = {})
+      def acts_as_locked(*args)
         cattr_accessor :fields
-        self.fields = options.delete(:fields)
+        self.fields = args
 
         validate :changes_on_lock
       end
